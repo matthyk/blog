@@ -1,11 +1,13 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
+  NAME: "matthyk's blog",
+  EMAIL: "matthyk.dev@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_TALKS_ON_HOMEPAGE: 3,
+  AUTHOR: "Matthias Keckl"
 };
 
 export const HOME: Metadata = {
@@ -18,9 +20,9 @@ export const BLOG: Metadata = {
   DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+export const CV: Metadata = {
+  TITLE: "CV",
+  DESCRIPTION: "My professional experience and core skills.",
 };
 
 export const PROJECTS: Metadata = {
@@ -28,17 +30,28 @@ export const PROJECTS: Metadata = {
   DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
 
+export const TALKS: Metadata = {
+  TITLE: "Talks",
+  DESCRIPTION: "Talks and presentations I have given.",
+};
+
+export const IMPRESSUM: Metadata = {
+  TITLE: "Impressum",
+  DESCRIPTION: "Legal notice with provider information for this website.",
+};
+
+export const PRIVACY_POLICY: Metadata = {
+  TITLE: "Datenschutzerklaerung",
+  DESCRIPTION: "Informationen darueber, wie personenbezogene Daten auf dieser Website verarbeitet werden.",
+};
+
 export const SOCIALS: Socials = [
   { 
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
-  },
-  { 
     NAME: "github",
-    HREF: "https://github.com/markhorn-dev"
+    HREF: "https://github.com/matthyk"
   },
   { 
     NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
+    HREF: "https://www.linkedin.com/in/matthias-keckl",
   }
 ];

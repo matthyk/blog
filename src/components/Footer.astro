@@ -1,5 +1,6 @@
 ---
 import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 ---
@@ -11,11 +12,18 @@ import BackToTop from "@components/BackToTop.astro";
         <BackToTop />
       </div>
     </div>
-    <div class="flex justify-between items-center">
-      <div>
-        &copy; 2024 {`|`} {SITE.NAME}
-      </div>
-      <div class="flex flex-wrap gap-1 items-center">
+      <div class="flex flex-wrap gap-y-3 justify-between items-center">
+        <div class="space-y-1">
+          <div>
+            &copy; 2026 {`|`} {SITE.AUTHOR}
+          </div>
+          <div class="text-sm flex flex-wrap items-center gap-1">
+            <Link href="/impressum">Legal Notice</Link>
+            <span>{` `}</span>
+            <Link href="/datenschutzerklaerung">Privacy Policy</Link>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1 items-center">
         <button
           id="light-theme-button"
           aria-label="Light theme"

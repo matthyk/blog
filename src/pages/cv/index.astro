@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { dateRange } from "@lib/utils";
+import { CV } from "@consts";
+
+const skillGroups = [
+  {
+    title: "Core Skills",
+    skills: [
+      "Node.js",
+      "TypeScript",
+      "HTTP",
+      "Web Standards",
+      "API Design",
+      "API Testing",
+      "Developer Tooling",
+      "Open Source Software (OSS)",
+    ],
+  },
+  {
+    title: "Languages",
+    skills: [
+      "TypeScript",
+      "JavaScript",
+      "C++ (foundational experience)",
+      "Java (foundational experience)",
+      "Python (foundational experience)",
+      "German (native)",
+      "English",
+    ],
+  },
+  {
+    title: "Tooling",
+    skills: ["Git", "GitHub", "Docker", "Nx"],
+  },
+  {
+    title: "Frameworks and Libraries",
+    skills: ["Fastify", "NestJS", "Vitest", "oclif"],
+  },
+];
+
+const education = [
+  {
+    period: "2022 - 2025",
+    degree: "Master in Computer Science",
+    institution: "Julius Maximilians University of Wuerzburg",
+    gpa: "3.8/4.0",
+    thesis: "Thymian - An HTTP Conformance Tool for Web APIs",
+    thesisGrade: "1.0 - Excellent",
+  },
+  {
+    period: "2017 - 2021",
+    degree: "Bachelor in Computer Science",
+    institution: "Technical University of Applied Sciences Wuerzburg-Schweinfurt",
+    gpa: "3.6/4.0",
+    thesis: "Design and Implementation of a Node.js Framework for the Development of RESTful APIs",
+    thesisGrade: "1.0 - Excellent",
+  },
+  {
+    period: "2008 - 2016",
+    degree: "General qualification for university entrance (Abitur)",
+  },
+];
+
+const collection = (await getCollection("work"))
+  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf());
+
+const work = await Promise.all(
+  collection.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  })
+);
+---
+
+<PageLayout title={CV.TITLE} description={CV.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate text-lg font-semibold text-black dark:text-white">
+        CV
+      </div>
+
+      <section class="space-y-4">
+        <div class="animate font-semibold text-black dark:text-white">Skills</div>
+        <div class="space-y-4">
+          {skillGroups.map((group) => (
+            <article class="animate space-y-2">
+              <h2 class="text-sm font-semibold text-black dark:text-white">{group.title}</h2>
+              <ul class="list-none m-0 flex flex-wrap gap-2 p-0">
+                {group.skills.map((skill) => (
+                  <li class="rounded-md border border-black/15 dark:border-white/20 px-2.5 py-1 text-sm">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <hr class="border-black/10 dark:border-white/15" />
+
+      <section class="space-y-4">
+        <div class="animate font-semibold text-black dark:text-white">Experience</div>
+      <ul class="list-none m-0 flex flex-col space-y-4 p-0">
+        { 
+          work.map(entry => (
+            <li class="animate">
+              <div class="text-sm opacity-75">
+                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+              </div>
+              <div class="font-semibold text-black dark:text-white">
+                {entry.data.company}
+              </div>
+              <div class="text-sm opacity-75">
+                {entry.data.role}
+              </div>
+              <article>
+                <entry.Content />
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+      </section>
+
+      <hr class="border-black/10 dark:border-white/15" />
+
+      <section class="space-y-4">
+        <div class="animate font-semibold text-black dark:text-white">Education</div>
+        <ul class="list-none m-0 flex flex-col space-y-4 p-0">
+          {education.map((entry) => (
+            <li class="animate">
+              <div class="text-sm opacity-75">{entry.period}</div>
+              <div class="font-semibold text-black dark:text-white">
+                {entry.degree}
+              </div>
+              {entry.institution && (
+                <div class="text-sm opacity-75">
+                  {entry.institution}
+                  {entry.gpa && ` (GPA: ${entry.gpa})`}
+                </div>
+              )}
+              {entry.thesis && (
+                <div class="text-sm opacity-75 mt-1">
+                  Thesis: {entry.thesis}
+                  {entry.thesisGrade && ` (Grade: ${entry.thesisGrade})`}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

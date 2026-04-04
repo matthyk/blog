@@ -1,0 +1,22 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { IMPRESSUM } from "@consts";
+---
+
+<PageLayout title={IMPRESSUM.TITLE} description={IMPRESSUM.DESCRIPTION}>
+  <Container>
+    <section class="space-y-8">
+      <h1 class="animate text-2xl font-semibold text-black dark:text-white">Impressum</h1>
+
+        <p>Matthias Keckl<br />
+        Huttenstra&szlig;e 8<br />
+        97072 W&uuml;rzburg</p>
+
+      <h2>Kontakt</h2>
+
+        <p>Telefon: +4915156050612<br />
+        E-Mail: matthyk.dev@gmail.com</p>
+    </section>
+  </Container>
+</PageLayout>

@@ -32,4 +32,18 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, work, projects };
+const talks = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    event: z.string().optional(),
+    draft: z.boolean().optional(),
+    eventURL: z.string().optional(),
+    slidesURL: z.string().optional(),
+    videoURL: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, work, projects, talks };

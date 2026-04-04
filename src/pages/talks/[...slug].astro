@@ -1,0 +1,81 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+import Link from "@components/Link.astro";
+
+export async function getStaticPaths() {
+  const talks = (await getCollection("talks"))
+    .filter(talk => !talk.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return talks.map((talk) => ({
+    params: { slug: talk.slug },
+    props: talk,
+  }));
+}
+
+type Props = CollectionEntry<"talks">;
+
+const talk = Astro.props;
+const { Content } = await talk.render();
+---
+
+<PageLayout title={talk.data.title} description={talk.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/talks">
+        Back to talks
+      </BackToPrev>
+    </div>
+    <div class="space-y-1 my-10">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          <FormattedDate date={talk.data.date} />
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {readingTime(talk.body)}
+        </div>
+      </div>
+      <div class="animate text-2xl font-semibold text-black dark:text-white">
+        {talk.data.title}
+      </div>
+      {talk.data.event && (
+        <div class="animate text-sm opacity-75">
+          {talk.data.event}
+        </div>
+      )}
+      {(talk.data.eventURL || talk.data.slidesURL || talk.data.videoURL) && (
+        <nav class="animate flex gap-1">
+          {talk.data.eventURL && (
+            <Link href={talk.data.eventURL} external>
+              event
+            </Link>
+          )}
+          {talk.data.eventURL && (talk.data.slidesURL || talk.data.videoURL) && (
+            <span>/</span>
+          )}
+          {talk.data.slidesURL && (
+            <Link href={talk.data.slidesURL} external>
+              slides
+            </Link>
+          )}
+          {talk.data.slidesURL && talk.data.videoURL && (
+            <span>/</span>
+          )}
+          {talk.data.videoURL && (
+            <Link href={talk.data.videoURL} external>
+              video
+            </Link>
+          )}
+        </nav>
+      )}
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>
