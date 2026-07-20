@@ -4,6 +4,7 @@ description: "Talk about the plugin system of Fastify and how it can be used to 
 date: "2026-07-10"
 event: "My Coding Zone"
 eventURL: "https://www.meetup.com/de-de/my-coding-zone/events/315457852/?slug=my-coding-zone&isFirstPublish=true"
+videoURL: https://www.youtube.com/watch?v=1IvUSEnGkZ8
 ---
 
 I was guest on My Coding Zone, hosted by Gregor Biswanger, to talk about HTTP, API design and developer tooling. The stream explored why HTTP is more than just a transport layer and how better conformance to web standards can improve API quality, interoperability, and tooling. I will also share insights from building Thymian, a project focused on analyzing and testing HTTP API behavior.
