@@ -24,6 +24,11 @@ const talks = (await getCollection("talks"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_TALKS_ON_HOMEPAGE);
 
+const research = (await getCollection("research"))
+  .filter(item => !item.data.draft)
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, SITE.NUM_RESEARCH_ON_HOMEPAGE);
+
 const allwork = (await getCollection("work"))
   .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
   .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
@@ -155,6 +160,28 @@ const work = await Promise.all(
           </ul>
         ) : (
           <p class="opacity-75">No talks added yet.</p>
+        )}
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Research
+          </h5>
+          <Link href="/research">
+            See all research
+          </Link>
+        </div>
+        {research.length > 0 ? (
+          <ul class="flex flex-col gap-4">
+            {research.map(item => (
+              <li>
+                <ArrowCard entry={item} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="opacity-75">No research added yet.</p>
         )}
       </section>
 

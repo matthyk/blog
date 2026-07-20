@@ -1,0 +1,54 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+
+export async function getStaticPaths() {
+  const research = (await getCollection("research"))
+    .filter(item => !item.data.draft)
+    .sort((a, b) => b.data.year - a.data.year);
+  return research.map((item) => ({
+    params: { slug: item.slug },
+    props: item,
+  }));
+}
+
+type Props = CollectionEntry<"research">;
+
+const item = Astro.props;
+const { Content } = await item.render();
+const description = item.data.abstract ?? `${item.data.author} (${item.data.year})`;
+const venue = item.data.journal ?? item.data.booktitle;
+---
+
+<PageLayout title={item.data.title} description={description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/research">
+        Back to research
+      </BackToPrev>
+    </div>
+    <div class="space-y-1 my-10">
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
+          {item.data.year}
+        </div>
+        &bull;
+        <div class="font-base text-sm">
+          {readingTime(item.body)}
+        </div>
+      </div>
+      <div class="animate text-2xl font-semibold text-black dark:text-white">
+        {item.data.title}
+      </div>
+      <div class="animate text-sm opacity-75">
+        {item.data.author}{venue && ` · ${venue}`}
+      </div>
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>

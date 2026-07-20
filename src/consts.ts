@@ -7,6 +7,7 @@ export const SITE: Site = {
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
   NUM_TALKS_ON_HOMEPAGE: 3,
+  NUM_RESEARCH_ON_HOMEPAGE: 3,
   AUTHOR: "Matthias Keckl"
 };
 
@@ -33,6 +34,11 @@ export const PROJECTS: Metadata = {
 export const TALKS: Metadata = {
   TITLE: "Talks",
   DESCRIPTION: "Talks and presentations I have given.",
+};
+
+export const RESEARCH: Metadata = {
+  TITLE: "Research",
+  DESCRIPTION: "Research projects and publications I have contributed to.",
 };
 
 export const IMPRESSUM: Metadata = {

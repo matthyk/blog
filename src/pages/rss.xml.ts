@@ -13,18 +13,34 @@ export async function GET(context: Context) {
   const projects = (await getCollection("projects"))
     .filter(project => !project.data.draft);
 
-  const items = [...blog, ...projects]
-    .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+  const research = (await getCollection("research"))
+    .filter(item => !item.data.draft);
 
-  return rss({
-    title: HOME.TITLE,
-    description: HOME.DESCRIPTION,
-    site: context.site,
-    items: items.map((item) => ({
+  const items = [
+    ...blog.map(item => ({
       title: item.data.title,
       description: item.data.description,
       pubDate: item.data.date,
       link: `/${item.collection}/${item.slug}/`,
     })),
+    ...projects.map(item => ({
+      title: item.data.title,
+      description: item.data.description,
+      pubDate: item.data.date,
+      link: `/${item.collection}/${item.slug}/`,
+    })),
+    ...research.map(item => ({
+      title: item.data.title,
+      description: item.data.abstract ?? `${item.data.author} (${item.data.year})`,
+      pubDate: new Date(item.data.year, 0, 1),
+      link: `/${item.collection}/${item.slug}/`,
+    })),
+  ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+  return rss({
+    title: HOME.TITLE,
+    description: HOME.DESCRIPTION,
+    site: context.site,
+    items,
   });
 }

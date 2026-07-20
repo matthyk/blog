@@ -46,4 +46,27 @@ const talks = defineCollection({
   }),
 });
 
-export const collections = { blog, work, projects, talks };
+const research = defineCollection({
+  type: "content",
+  schema: z.object({
+    type: z.string(),
+    key: z.string(),
+    title: z.string(),
+    author: z.string(),
+    year: z.coerce.number().int().nonnegative(),
+    month: z.string().optional(),
+    journal: z.string().optional(),
+    booktitle: z.string().optional(),
+    publisher: z.string().optional(),
+    volume: z.string().optional(),
+    number: z.string().optional(),
+    pages: z.string().optional(),
+    doi: z.string().optional(),
+    url: z.string().optional(),
+    abstract: z.string().optional(),
+    note: z.string().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, work, projects, talks, research };

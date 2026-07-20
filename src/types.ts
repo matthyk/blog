@@ -5,6 +5,7 @@ export type Site = {
   NUM_WORKS_ON_HOMEPAGE: number;
   NUM_PROJECTS_ON_HOMEPAGE: number;
   NUM_TALKS_ON_HOMEPAGE: number;
+  NUM_RESEARCH_ON_HOMEPAGE: number;
   AUTHOR: string;
 };
 
