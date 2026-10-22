@@ -10,7 +10,9 @@ const description = entry.collection === "research"
   ? [entry.data.author, entry.data.year, entry.data.journal ?? entry.data.booktitle]
     .filter(Boolean)
     .join(" · ")
-  : entry.data.description;
+  : entry.collection === "talks" 
+    ? entry.data.event || entry.data.description 
+    : entry.data.description;
 ---
 
 <a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
