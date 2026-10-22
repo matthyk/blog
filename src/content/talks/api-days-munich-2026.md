@@ -2,7 +2,7 @@
 title: "Should I GET or Should I POST? - The Clash With HTTP Conformance"
 description: "Talk about HTTP Conformance at apidays Munich"
 date: "2026-07-08"
-event: "apidays Munich"
+event: "apidays Munich 2026"
 ---
 
 The greatest threat to your API's reliability isn't always a complex zero-day exploit, but rather a simple, collective misunderstanding of foundational HTTP semantics.
