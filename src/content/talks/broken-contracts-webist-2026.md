@@ -2,7 +2,7 @@
 title: "Broken Contracts? Towards Automated Conformance Testing for HTTP Semantics"
 description: "Presentation of research on automatically testing APIs for conformance to HTTP semantics."
 date: "2026-10-29"
-event: "WEBIST 2026"
+event: "WEBIST 2026 in Angers, France"
 eventURL: "https://webist.scitevents.org/"
 ---
 
