@@ -23,4 +23,6 @@ the lack of tools in the Node.js ecosystem. The conducted empirical study in thi
 the proposed framework offers significantly better support for REST API development than existing
 frameworks.
 
+This paper was awarded the Best Paper Award.
+
 [Read the proceedings](https://conferences.ulbsibiu.ro/icdd/2021/files/Proceedings_ICDD2021.pdf)
